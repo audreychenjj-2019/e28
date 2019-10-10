@@ -12,6 +12,8 @@ let app = new Vue({
         solution: null,
         guess: '',
         guesses: [],
+        imageSrc: '',
+        imageAlt: '',
     },
     methods: {
         // solutionGenerator: function () {
@@ -40,7 +42,7 @@ let app = new Vue({
         submitGuess: function () {
             this.submitted = true;
             this.valid = true;
-            // this.guesses.push(this.guess);
+            this.guesses.push(this.guess);
 
             if (typeof (this.guess) != 'number') {
                 this.feedbackClass = 'validationError';
@@ -51,20 +53,27 @@ let app = new Vue({
                 this.feedbackClass = 'error';
                 this.feedback = 'Too high. Try again.';
                 this.correct = false;
+                this.imageSrc = 'images/sad.jpg';
+                this.imageAlt = 'Frowny face';
             } else if (this.guess < this.solution) {
                 this.feedbackClass = 'error';
                 this.feedback = 'Too low. Try again.';
                 this.correct = false;
+                this.imageSrc = 'images/sad.jpg';
+                this.imageAlt = 'Frowny face';
             } else {
                 this.feedbackClass = '';
                 this.feedback = 'You got it!';
                 this.correct = true;
+                this.imageSrc = 'images/happy.jpg';
+                this.imageAlt = 'Happy smiley face';
             }
         },
 
         loadGame: function () {
             this.feedback = '';
             this.guess = '';
+            this.guesses = [];
             this.solutionGenerator();
         }
     },
