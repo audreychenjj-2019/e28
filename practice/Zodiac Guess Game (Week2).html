@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Zodia Guess Game</title>
+
+    <style>
+        html {
+            font-family: sans-serif;
+        }
+
+        body {
+            width: 50%;
+            max-width: 800px;
+            min-width: 480px;
+            margin: 0 auto;
+        }
+
+        span {
+            font-size: 24px;
+        }
+
+        button {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Guess Zodiac Sign</h1>
+
+    <p>Can you guess a random person's zodiac sign?</p>
+    <form action="/action_page.php">
+        </span><input type="radio" name="sign" value="Aries">Aries
+        <input type="radio" name="sign" value="Leo">Leo
+        <input type="radio" name="sign" value="Sagittarius">Sagittarius<br><br>
+        </span><input type="radio" name="sign" value="Taurus">Taurus
+        <input type="radio" name="sign" value="Virgo">Virgo
+        <input type="radio" name="sign" value="Capricorn">Capricorn<br><br>
+        <input type="radio" name="sign" value="Gemini">Gemini
+        <input type="radio" name="sign" value="Libra">Libra
+        <input type="radio" name="sign" value="Aquarius">Aquarius<br><br>
+        <input type="radio" name="sign" value="Cancer">Cancer
+        <input type="radio" name="sign" value="Pisces">Pisces
+        <input type="radio" name="sign" value="Scorpio">Scorpio
+        <br><br>
+        <input type="button" onclick="mySign()" value="Sumbit your guess.">
+        <br><br>
+    </form>
+
+    <p id="answer"></p>
+
+
+    <script type="text/javascript">
+        function mySign() {
+            var randNumb = Math.floor(Math.random() * 12) + 1;
+            var randSign = "";
+            if (randNumb == 1) { randSign = "Aries"; }
+            else if (randNumb == 2) { randSign = "Leo"; }
+            else if (randNumb == 3) { randSign = "Sagittarius"; }
+            else if (randNumb == 4) { randSign = "Taurus"; }
+            else if (randNumb == 5) { randSign = "Virgo"; }
+            else if (randNumb == 6) { randSign = "Capricorn"; }
+            else if (randNumb == 7) { randSign = "Gemini"; }
+            else if (randNumb == 8) { randSign = "Libra"; }
+            else if (randNumb == 9) { randSign = "Aquarius"; }
+            else if (randNumb == 10) { randSign = "Cancer"; }
+            else if (randNumb == 11) { randSign = "Pisces"; }
+            else { randSign = "Scorpio" }
+
+            var showAnswer = document.getElementById("answer");
+            showAnswer.innerHTML = "";
+
+            var sign = document.forms[0];
+            var txt = "";
+            var i;
+            for (i = 0; i < sign.length; i++) {
+                if (sign[i].checked) {
+                    txt = txt + sign[i].value;
+                }
+            }
+            if (txt == randSign) { showAnswer.innerHTML = "You win!"; }
+            else { showAnswer.innerHTML = "You lose." }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
