@@ -124,7 +124,8 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": ""
     }
-  }
+  },
+  template: "#round-detail"
 });
 
 /***/ }),
@@ -141,7 +142,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n.winner[data-v-d08d8c02] {\r\n    background-color: green;\n}\r\n", ""]);
+exports.push([module.i, "\n.winner[data-v-d08d8c02] {\r\n  background-color: green;\n}\r\n", ""]);
 
 // exports
 
@@ -1277,7 +1278,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("Delete round")]
+      [_vm._v("Remove round")]
     )
   ])
 }
@@ -13545,7 +13546,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\jiajiac\Desktop\Vue\Redo class example - week8\week8\src\script.js */"./src/script.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\e28\week8\src\script.js */"./src/script.js");
 
 
 /***/ })
