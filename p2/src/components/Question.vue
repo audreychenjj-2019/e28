@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="questionUL">{{ currentQuestion.question }}</ul>
+    <ul class="questionUL">{{ decodedQuestion }}</ul>
     <br />
     <br />
     <ol type="A">
@@ -17,7 +17,11 @@
       v-on:click="submitAnswer"
       v-bind:disabled="selectedIndex === null || answered"
     >Submit</button>
-    <button v-if="!allQuestionsDone && numTotal<10" v-on:click="next" variant="success">Next</button>
+    <button
+      v-if="!allQuestionsDone && numTotal<10 && answered"
+      v-on:click="next"
+      variant="success"
+    >Next</button>
     <br />
   </div>
 </template>
@@ -37,6 +41,7 @@ export default {
       selectedIndex: null,
       correctIndex: null,
       shuffledAnswers: [],
+      decodedQuestion: "",
       answered: false
     };
   },
@@ -54,10 +59,17 @@ export default {
         this.selectedIndex = null;
         this.answered = false;
         this.shuffleAnswers();
+        this.decodedQuestion = this.decode(this.currentQuestion.question);
       }
     }
   },
   methods: {
+    decode: function(html) {
+      var txt = document.createElement("textarea");
+      txt.innerHTML = html;
+      return txt.value;
+    },
+
     selectAnswer(index) {
       this.selectedIndex = index;
     },
@@ -73,14 +85,14 @@ export default {
     },
     shuffleAnswers() {
       this.correctIndex = Math.floor(Math.random() * Math.floor(4));
-      this.shuffledAnswers[
-        this.correctIndex
-      ] = this.currentQuestion.correct_answer;
+      this.shuffledAnswers[this.correctIndex] = this.decode(
+        this.currentQuestion.correct_answer
+      );
       for (let i = 0, incorrecti = 0; i < 4; i++) {
         if (i != this.correctIndex) {
-          this.shuffledAnswers[i] = this.currentQuestion.incorrect_answers[
-            incorrecti
-          ];
+          this.shuffledAnswers[i] = this.decode(
+            this.currentQuestion.incorrect_answers[incorrecti]
+          );
           incorrecti++;
         }
       }
@@ -98,7 +110,6 @@ export default {
       ) {
         answerClass = "incorrect";
       }
-
       return answerClass;
     }
   }
