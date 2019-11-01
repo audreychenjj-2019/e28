@@ -5,32 +5,6 @@
 
     <Settings v-on:fetch-quiz="loadQuiz" v-on:stop-quiz="haltQuiz" />
 
-    <!-- <div v-if="changeQuizSettings">
-      <label>Category:</label>
-      <select v-model="categorySelected">
-        <option
-          v-for="category in categories"
-          v-bind:value="{ id: category.id, readable: category.readable }"
-          v-bind:key="category.id"
-        >{{ category.readable }}</option>
-      </select>
-
-      <label>Difficulty:</label>
-      <select v-model="level">
-        <option value="any">Any Difficulty</option>
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-      </select>
-
-      <button v-on:click="loadQuiz">Start Quiz</button>
-    </div>
-    <div v-else>
-      Current Quiz Settings: Category is {{categorySelected.readable}}. Difficulty level is set to {{level}}.
-      <button
-        v-on:click="changeQuizSettings=true, quizOn=false"
-      >Change/Reset Settings</button>
-    </div>-->
     <br />
     <div v-if="quizOn">
       <Question
@@ -70,21 +44,6 @@ export default {
       numCorrect: 0,
       numTotal: 0,
       quizOn: false
-      // baseURL: "https://opentdb.com/api.php?amount=10&type=multiple",
-      // questionBankURL: "",
-      // categorySelected: { id: "17", readable: "Science & Nature" },
-      // categories: [
-      //   { id: "9", readable: "General Knowledge" },
-      //   { id: "10", readable: "Entertainment: Books" },
-      //   { id: "17", readable: "Science & Nature" },
-      //   { id: "18", readable: "Science: Computers" },
-      //   { id: "22", readable: "Geography" },
-      //   { id: "23", readable: "History" },
-      //   { id: "27", readable: "Animals" },
-      //   { id: "28", readable: "Vehicles" }
-      // ],
-      // level: "any",
-      // changeQuizSettings: true
     };
   },
   methods: {
@@ -106,33 +65,15 @@ export default {
     },
     loadQuiz: function(questionBankURL) {
       this.fetchQuiz(questionBankURL);
-      // loadQuiz: function() {
-      //   this.generateUrlFromSettings();
-      //   this.fetchQuiz();
       this.index = 0;
       this.allQuestionsDone = false;
       this.numCorrect = 0;
       this.numTotal = 0;
       this.quizOn = true;
     },
-    // generateUrlFromSettings: function() {
-    //   this.questionBankURL = this.baseURL;
-    //   if (this.categorySelected != "any") {
-    //     this.questionBankURL = this.questionBankURL
-    //       .concat("&category=")
-    //       .concat(this.categorySelected.id);
-    //   }
-    //   if (this.level != "any") {
-    //     this.questionBankURL = this.questionBankURL
-    //       .concat("&difficulty=")
-    //       .concat(this.level);
-    //   }
-    //   this.changeQuizSettings = false;
-    // },
     fetchQuiz: function(questionBankURL) {
-      // fetchQuiz: function() {
       this.questions = "";
-      // fetch(this.questionBankURL, {
+
       fetch(questionBankURL, {
         method: "get"
       })
