@@ -3,7 +3,9 @@
     <h2>Welcome to a Fun 10-Question Quiz</h2>
     <br />
 
-    <div v-if="changeQuizSettings">
+    <Settings v-on:fetch-quiz="loadQuiz" v-on:stop-quiz="haltQuiz" />
+
+    <!-- <div v-if="changeQuizSettings">
       <label>Category:</label>
       <select v-model="categorySelected">
         <option
@@ -28,8 +30,7 @@
       <button
         v-on:click="changeQuizSettings=true, quizOn=false"
       >Change/Reset Settings</button>
-    </div>
-
+    </div>-->
     <br />
     <div v-if="quizOn">
       <Question
@@ -51,14 +52,15 @@
 </template>
 
 <script>
+import Settings from "./components/Settings.vue";
 import Question from "./components/Question.vue";
 import Conclusion from "./components/Conclusion.vue";
-
 export default {
   name: "app",
   components: {
     Question,
-    Conclusion
+    Conclusion,
+    Settings
   },
   data() {
     return {
@@ -67,25 +69,24 @@ export default {
       allQuestionsDone: false,
       numCorrect: 0,
       numTotal: 0,
-      quizOn: false,
-      baseURL: "https://opentdb.com/api.php?amount=10&type=multiple",
-      questionBankURL: "",
-      categorySelected: { id: "17", readable: "Science & Nature" },
-      categories: [
-        { id: "9", readable: "General Knowledge" },
-        { id: "10", readable: "Entertainment: Books" },
-        { id: "17", readable: "Science & Nature" },
-        { id: "18", readable: "Science: Computers" },
-        { id: "22", readable: "Geography" },
-        { id: "23", readable: "History" },
-        { id: "27", readable: "Animals" },
-        { id: "28", readable: "Vehicles" }
-      ],
-      level: "any",
-      changeQuizSettings: true
+      quizOn: false
+      // baseURL: "https://opentdb.com/api.php?amount=10&type=multiple",
+      // questionBankURL: "",
+      // categorySelected: { id: "17", readable: "Science & Nature" },
+      // categories: [
+      //   { id: "9", readable: "General Knowledge" },
+      //   { id: "10", readable: "Entertainment: Books" },
+      //   { id: "17", readable: "Science & Nature" },
+      //   { id: "18", readable: "Science: Computers" },
+      //   { id: "22", readable: "Geography" },
+      //   { id: "23", readable: "History" },
+      //   { id: "27", readable: "Animals" },
+      //   { id: "28", readable: "Vehicles" }
+      // ],
+      // level: "any",
+      // changeQuizSettings: true
     };
   },
-
   methods: {
     next() {
       if (this.index < 9) {
@@ -100,35 +101,39 @@ export default {
       }
       this.numTotal++;
     },
-
-    loadQuiz: function() {
-      this.generateUrlFromSettings();
-      this.fetchQuiz();
+    haltQuiz: function() {
+      this.quizOn = false;
+    },
+    loadQuiz: function(questionBankURL) {
+      this.fetchQuiz(questionBankURL);
+      // loadQuiz: function() {
+      //   this.generateUrlFromSettings();
+      //   this.fetchQuiz();
       this.index = 0;
       this.allQuestionsDone = false;
       this.numCorrect = 0;
       this.numTotal = 0;
       this.quizOn = true;
     },
-
-    generateUrlFromSettings: function() {
-      this.questionBankURL = this.baseURL;
-      if (this.categorySelected != "any") {
-        this.questionBankURL = this.questionBankURL
-          .concat("&category=")
-          .concat(this.categorySelected.id);
-      }
-      if (this.level != "any") {
-        this.questionBankURL = this.questionBankURL
-          .concat("&difficulty=")
-          .concat(this.level);
-      }
-      this.changeQuizSettings = false;
-    },
-
-    fetchQuiz: function() {
+    // generateUrlFromSettings: function() {
+    //   this.questionBankURL = this.baseURL;
+    //   if (this.categorySelected != "any") {
+    //     this.questionBankURL = this.questionBankURL
+    //       .concat("&category=")
+    //       .concat(this.categorySelected.id);
+    //   }
+    //   if (this.level != "any") {
+    //     this.questionBankURL = this.questionBankURL
+    //       .concat("&difficulty=")
+    //       .concat(this.level);
+    //   }
+    //   this.changeQuizSettings = false;
+    // },
+    fetchQuiz: function(questionBankURL) {
+      // fetchQuiz: function() {
       this.questions = "";
-      fetch(this.questionBankURL, {
+      // fetch(this.questionBankURL, {
+      fetch(questionBankURL, {
         method: "get"
       })
         .then(response => {
@@ -152,12 +157,10 @@ export default {
   color: #2c3e50;
   margin-top: 30px;
 }
-
 label {
   margin: 0 20px;
   font-size: 16px;
 }
-
 button {
   margin: 0 15px;
   font-size: 16px;

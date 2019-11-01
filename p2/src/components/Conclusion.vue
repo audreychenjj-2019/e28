@@ -3,7 +3,7 @@
     <div v-if="numTotal<10">You got {{ numCorrect }} out of {{ numTotal }} right.</div>
     <div
       v-if="numTotal==10"
-    >End of the quiz. You got {{ numCorrect }} out of {{ numTotal }} right. Want to take another quiz? Please click the Change/Reset Settings button on the top.</div>
+    >End of the quiz. You got {{ numCorrect }} out of {{ numTotal }} right. Want to take another quiz? Click the Change/Reset Settings button on the top.</div>
   </div>
 </template>
 
