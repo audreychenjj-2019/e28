@@ -1,56 +1,44 @@
-
 export default class Portfolio {
+	constructor() {
+		let portfolio = localStorage.getItem("portfolio");
 
-    constructor() {
+		this.holdings = portfolio ? JSON.parse(portfolio) : [];
+	}
 
-        let portfolio = localStorage.getItem('portfolio');
+	getHoldings() {
+		return this.holdings;
+	}
 
+	getItem(symbol1) {
+		let m = this.holdings.find(({ symbol }) => symbol === symbol1) || null;
 
-        this.holdings = (portfolio) ? JSON.parse(portfolio) : [];
-    }
+		return m;
+	}
 
-    getHoldings() {
-        return this.holdings;
-    }
+	count() {
+		return this.holdings.length;
+	}
 
-    getItem(symbol1) {
+	update(holdings) {
+		this.holdings = holdings;
+		this.updateToStorage();
+	}
 
-        let m = this.holdings.find(({ symbol }) => symbol === symbol1) || null;
+	updateToStorage() {
+		localStorage.setItem("portfolio", JSON.stringify(this.holdings));
+	}
 
-        return m;
-    }
+	add() {
+		this.updateToStorage();
+	}
 
-    count() {
-        return this.holdings.length;
+	remove(symbol) {
+		let holding = this.getItem(symbol);
 
-    }
-
-    update(holdings) {
-        this.holdings = holdings;
-        this.updateToStorage();
-    }
-
-    updateToStorage() {
-        localStorage.setItem('portfolio', JSON.stringify(this.holdings))
-    }
-
-    add() {
-
-
-
-        this.updateToStorage();
-    }
-
-
-    remove(symbol) {
-        let holding = this.getItem(symbol);
-
-        if (holding) {
-            let holdingIndex = this.holdings.indexOf(holding);
-            this.holdings.splice(holdingIndex, 1);
-            this.updateToStorage();
-        }
-    }
-
-
+		if (holding) {
+			let holdingIndex = this.holdings.indexOf(holding);
+			this.holdings.splice(holdingIndex, 1);
+			this.updateToStorage();
+		}
+	}
 }
