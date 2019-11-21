@@ -1,0 +1,188 @@
+/* box sizing: http://www.paulirish.com/2012/box-sizing-border-box-ftw */
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+	/* http://snook.ca/archives/html_and_css/font-size-with-rem */
+	color: #111;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+	/* Have the scroll bars always on so there's not a shift in the layout
+    when going from a non-scrolling page to a scrolling-page */
+	overflow-y: scroll;
+}
+
+body {
+	/* Default font-size */
+	font-size: 1.6rem;
+
+	/* sticky footer - match footer height */
+	margin-bottom: 60px;
+}
+
+/*----------------------------------------------------
+VARIABLES
+-----------------------------------------------------*/
+$radius: 5px;
+
+/* https: //clrs.cc/ */
+$aqua: #7fdbff;
+$blue: #0074d9;
+$navy: #001f3f;
+$teal: #39cccc;
+$green: #2ecc40;
+$olive: #3d9970;
+$lime: #01ff70;
+
+$yellow: #ffdc00;
+$orange: #ff851b;
+$red: #ff4136;
+$fuchsia: #f012be;
+$purple: #b10dc9;
+$maroon: #85144b;
+
+$white: #ffffff;
+$silver: #dddddd;
+$gray: #aaaaaa;
+$black: #111111;
+
+/*----------------------------------------------------
+GENERAL PAGE LAYOUT/DESIGN
+-----------------------------------------------------*/
+#app {
+	width: 100%;
+	margin: auto;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+header {
+	text-align: center;
+	margin-top: 20px;
+}
+
+nav ul {
+	list-style-type: none;
+
+	li {
+		display: inline-block;
+
+		a:link,
+		a:visited,
+		a:active,
+		a:hover {
+			text-transform: capitalize;
+			padding: 5px;
+			margin: 5px;
+			cursor: pointer;
+			color: $blue;
+		}
+
+		a:hover {
+			background-color: $blue;
+			color: white;
+			text-decoration: none;
+		}
+
+		a.router-link-active:link,
+		a.router-link-active:visited,
+		a.router-link-active:active,
+		a.router-link-active:hover {
+			text-decoration: none;
+			color: $black;
+			background-color: white;
+			cursor: inherit;
+		}
+	}
+}
+
+/*----------------------------------------------------
+PAGE SPECIFIC
+-----------------------------------------------------*/
+// #today-page {
+// 	margin: auto;
+// 	width: 100%;
+// 	margin: auto;
+// 	padding-bottom: 20px;
+// 	// text-align: center;
+
+// 	// .majorIndexes { width: 35%; };
+// 	// .mostActiveStock {width: 45%; };
+// 	// .mostGainers {width: 45%;};
+// 	// .mostLosers {width: 45%; };
+// 	// .sectorPerformance {width: 50%; };
+
+// 	// .increase {color: $green;};
+// 	// .decrease {color: $red;};
+// }
+
+// #today-page td,
+// #today-page th {
+// 	// border: 1px solid #ddd;
+// 	border: none;
+// 	padding: 8px;
+// 	vertical-align: top;
+// }
+
+// #today-page tr:nth-child(even) {
+// 	background-color: $silver;
+// }
+
+// #today-page th {
+// 	padding-top: 12px;
+// 	padding-bottom: 12px;
+// 	text-align: center;
+// 	background-color: $blue;
+// 	color: white;
+// }
+
+#research-page {
+	padding: 5px;
+}
+
+#portfolio-page {
+	// margin: auto;
+	border-radius: $radius;
+	border: 3px solid #0074d9;
+	width: 100%;
+
+	button {
+		display: block;
+		margin: 10px auto;
+		font-size: 1.5rem;
+	}
+}
+
+#portfolio-page td,
+#portfolio-page th {
+	padding: 8px;
+}
+
+#portfolio-page th {
+	padding: 12px;
+	text-align: center;
+	background-color: $blue;
+	color: white;
+}
+
+#research-page {
+	.keyMetrics {
+		height: 500px;
+		overflow: auto;
+	}
+
+	#showmetrics-wrapper {
+		position: relative;
+	}
+	#showmetrics-scroll {
+		height: 400px;
+		overflow: auto;
+	}
+	#showmetrics-wrapper table {
+		width: 100%;
+	}
+}
