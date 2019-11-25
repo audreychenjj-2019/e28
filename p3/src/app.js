@@ -11,6 +11,8 @@ export const config = {
 	sectorPerformanceUrl:
 		"https://financialmodelingprep.com/api/v3/stock/sectors-performance",
 	baseProfileUrl: "https://financialmodellingprep.com/api/v3/company/profile/",
+	baseIndexComponentUrl:
+		"https://my-json-server.typicode.com/audreychenjj-2019/p3-symbolslist-api/symbols?symbol=",
 	companyKeyMetricsBaseUrl:
 		"https://financialmodelingprep.com/api/v3/company-key-metrics/",
 	companiesPriceListUrl:
