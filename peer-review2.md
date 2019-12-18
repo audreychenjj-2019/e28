@@ -15,7 +15,11 @@
 
 ### Were there any parts of the interface that you found confusing or unclear?
 This application interface is neat and clear. I did not see parts that were confusing or unclear. The points I mention here are merely small user experience and user interface topics -
+<<<<<<< Updated upstream
 + For those user segments who aren't familiar with the breeds or can't remember the breed names or are more visual, it would be valuable to have a voting button on the Available Dog information page, and/or place small thumbnails of the dogs on the Voting page. Ideally have smaller sized thumbnail images to load there instead of only resizing to improve performance. 
+=======
++ For those user segments who aren't familiar with the breeds or can't remember the breed names or are more visual, it would be valuable to have a voting button on the Available Dog information page, and/or place small thumbnails of the dogs on the Voting page.
+>>>>>>> Stashed changes
 + When a user visits the Available Dog information page after voting for that specific dog breed, given that the voting information is already in Local Storage that this dog received the vote, it would be valuable for the user to see that they voted for this dog.
 + Mostly popularized by e-commerce sites, but even more important to give all dogs in a shelter an opportunity to be adopted, the rectangular frames for each dog on the Available Dog page could float to the left of the previous dog thereby increasing the number of dogs visible on each view without scrolling. Floating to the left would also render better if viewed on phone web browsers.
 + Beyond the current use-case of the app, but would be good to group the dogs into categories so that users who are seeking a certain category of dog, such as working, herding, sporting, non-sporting, etc, or by temperament such as affectionate, friendly, intelligent, wild, etc, or by lifespan can filter more easily to see all the available dogs that match what they are looking for.
@@ -61,4 +65,8 @@ Other than these, the variable and function names are meaningfully named and use
 
 ### Do you have any additional comments not covered in the above questions?
 I appreciate the application is well written for the use-cases, with some of the areas for improvements mentioned above.
+<<<<<<< Updated upstream
 + While I enjoyed reading about all of the dogs (their specialties, lifespans and even came across worldlifeexpectancy.com/dog-life-expectancy), I see that this application could be extended in so many different ways, e.g. more animals for adoption, other topics or issues items to vote for, etc. The application could be built with planned extensibility, which means less hard-coding and structuring code with deliberate intent to extend or reuse.
+=======
++ While I enjoyed reading about all of the dogs (their specialties, lifespans and even came across worldlifeexpectancy.com/dog-life-expectancy), I see that this application could be extended in so many different ways, e.g. more animals for adoption, other topics or issues items to vote for, etc. The application could be built with planned extensibility, which means less hard-coding and structuring code better.
+>>>>>>> Stashed changes

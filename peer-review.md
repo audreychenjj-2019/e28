@@ -86,3 +86,4 @@ count() {
 ### Do you have any additional comments not covered in the above questions?
 * Very well chosen set of use-cases for this version of the application and the simplicity of the solution is very good too.
 * The more things you try, the more challenges you encounter and the more mistakes you make, and the more you learn. The minimalistic approach to this p3 covers all the basic requirements of the assigned project, but seems limited for learning. I hope this is the final optimized version of a lot of use-cases that were discarded for sake of a v0.1 MVP.  
+
