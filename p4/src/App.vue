@@ -1,11 +1,6 @@
 <template>
     <div id="app">
-        <img
-            id="logo"
-            alt="MarketDash logo"
-            class="imgSize"
-            src="./assets/images/stock.png"
-        />
+        <img id="logo" alt="MarketDash logo" class="imgSize" src="./assets/images/stock.png" />
         <div id="nav" class="navigation-bar">
             <span v-for="(link, index) in links" :key="index">
                 <router-link class="navigation-link" exact :to="{ name: link }">
@@ -55,10 +50,6 @@
         font-weight: bold;
         color: #2c3e50;
     }
-
-    /* #nav a.router-link-exact-active {
-		color: #42b983;
-	} */
 
     .navigation-link:link,
     .navigation-link:visited,

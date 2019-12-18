@@ -3,39 +3,34 @@
         <table width="100%">
             <tr v-if="user.loggedIn == true">
                 <div>
-                    <span class="display-name-span">{{
-                        user.profile.displayName
-                    }}</span
-                    >, you are logged in!
+                    <span class="display-name-span"> {{ user.profile.displayName }} </span>you are logged in!
                 </div>
                 <br />
 
                 <div v-if="user.holdings.length > 0">
-                    <span class="display-name-span">{{
-                        user.profile.displayName
-                    }}</span
-                    >'s holdings include
+                    Your holdings include
                     <ul>
-                        <li
-                            v-for="(holding, index) in user.holdings"
-                            :key="index"
-                        >
-                            {{ holding.symbol }}
-                        </li>
+                        <li v-for="(holding, index) in user.holdings" :key="index">{{ holding.symbol }}</li>
                     </ul>
                 </div>
-
+                <div v-else>You currently have 0 holdings. Get started, browse around, get comfy.</div>
                 <div>
-                    <button @click="signOut">Sign out</button>
+                    <button data-test="button-delete-account" @click="deleteAccount">Delete My Account</button>
+                </div>
+                <transition name="fade">
+                    <div :class="alertType" v-if="showAlert">{{ alertMessage }}</div>
+                </transition>
+                <div>
+                    <button data-test="button-signout" @click="signOut">Sign out</button>
                 </div>
             </tr>
             <tr v-else>
-                <td class="account-tabel-td">
-                    <login-page />
+                <td class="account-table-td">
+                    <signin-page />
                 </td>
                 <td>OR</td>
-                <td class="account-tabel-td">
-                    <register-page />
+                <td class="account-table-td">
+                    <signup-page />
                 </td>
             </tr>
         </table>
@@ -43,37 +38,55 @@
 </template>
 
 <script>
-    import { mapGetters } from "vuex";
-    import LoginVue from "@/components/Login.vue";
-    import Register from "@/components/Register.vue";
+    import SignIn from "@/components/SignIn.vue";
+    import SignUp from "@/components/SignUp.vue";
     import firebase from "firebase";
-    import store from "@/store";
 
     export default {
         components: {
-            "login-page": LoginVue,
-            "register-page": Register
+            "signin-page": SignIn,
+            "signup-page": SignUp
         },
 
         computed: {
-            // map `this.user` to `this.$store.getters.user`
-            ...mapGetters({
-                user: "user"
-            })
+            user: function() {
+                return this.$store.state.user;
+            }
+        },
+        data: function() {
+            return {
+                alertType: "",
+                showAlert: false,
+                alertMessage: ""
+            };
         },
         methods: {
             signOut() {
-                firebase
-                    .database()
-                    .ref("portfolios/" + store.state.user.uid)
-                    .set({
-                        holdings: store.state.user.holdings
-                    });
-                store.dispatch("clearUserData", this.user);
+                this.user.db.ref("portfolios/" + this.user.uid).set({
+                    holdings: this.user.holdings
+                });
+
                 firebase
                     .auth()
                     .signOut()
-                    .then(() => {});
+                    .then(() => {
+                        this.$store.dispatch("clearUserData", this.user);
+                    });
+            },
+
+            deleteAccount() {
+                this.user.db.ref("portfolios/" + this.user.uid).remove();
+
+                var firebaseUser = firebase.auth().currentUser;
+
+                firebaseUser
+                    .delete()
+                    .then(function() {
+                        this.$store.dispatch("clearUserData", this.user);
+                    })
+                    .catch(function(error) {
+                        window.console.log(error);
+                    });
             }
         }
     };

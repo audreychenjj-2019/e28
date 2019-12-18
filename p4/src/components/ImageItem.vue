@@ -1,11 +1,6 @@
 <template>
     <figure v-lazyload class="image__wrapper">
-        <img
-            class="image__item"
-            :data-url="source"
-            alt="relevant image"
-            onerror="this.style.display='none'"
-        />
+        <img class="image__item" :data-url="source" alt="relevant image" onerror="this.style.display='none'" />
     </figure>
 </template>
 

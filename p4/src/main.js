@@ -26,10 +26,14 @@ const configOptions = {
 firebase.initializeApp(configOptions);
 
 firebase.auth().onAuthStateChanged(user => {
-    store.dispatch("fetchUser", user);
+    if (user) {
+        store.dispatch("fetchUser", user);
+        const db = firebase.database();
+        store.commit("setDatabaseReference", db);
+    }
 });
 
-export const db = firebase.database();
+// export const db = firebase.database();
 
 // store.commit("setDatabaseReference", firebase.database());
 

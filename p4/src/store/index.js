@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { db } from "@/main";
 
 Vue.use(Vuex);
 
@@ -13,6 +12,7 @@ export default new Vuex.Store({
         symbolsList: [],
         totalValue: 0,
         portfolioRows: [],
+        portfolioEditStatus: null,
         user: {
             uid: null,
             db: null,
@@ -39,6 +39,9 @@ export default new Vuex.Store({
         },
         setPortfolioRows(state, payload) {
             state.portfolioRows = payload;
+        },
+        setPortfolioEditStatus(state, payload) {
+            state.portfolioEditStatus = payload;
         },
         setTotalValue(state, payload) {
             state.totalValue = payload;
@@ -80,27 +83,28 @@ export default new Vuex.Store({
             }
         },
 
-        fetchHoldings({ commit }, user) {
-            let holdingsInDB = [];
-            db.ref("portfolios/" + user.uid)
+        fetchHoldings({ commit, state }, user) {
+            state.user.db
+                .ref("portfolios/" + user.uid)
                 .once("value")
                 .then(snapshot => {
                     let portfolio = localStorage.getItem("portfolio");
-                    let holdingsInLocalStorage = portfolio
-                        ? JSON.parse(portfolio)
-                        : [];
+                    const holdingsInLocalStorage = portfolio ? JSON.parse(portfolio) : [];
 
-                    holdingsInDB = snapshot.child("holdings").val();
+                    const holdingsInDB = snapshot.child("holdings").val();
 
                     var union = holdingsInLocalStorage.concat(holdingsInDB);
+
+                    if (union && union[0] == null) {
+                        union = [];
+                    }
 
                     if (union.length >= 2) {
                         for (var i = 0; i < union.length; i++) {
                             for (var j = i + 1; j < union.length; j++) {
                                 if (union[i].symbol == union[j].symbol) {
                                     union[i].cost =
-                                        (union[i].shares * union[i].cost +
-                                            union[j].shares * union[j].cost) /
+                                        (union[i].shares * union[i].cost + union[j].shares * union[j].cost) /
                                         (union[i].shares + union[j].shares);
                                     union[i].shares += union[j].shares;
                                     union.splice(j, 1);

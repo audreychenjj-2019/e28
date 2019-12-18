@@ -1,25 +1,15 @@
 <template>
     <div id="research-page" class="research-page">
         <div>
-            <auto-complete
-                :showButton="true"
-                :showLabel="true"
-                :symbolId="symbol"
-                v-on:symbolentered="symbolEntered"
-            />
+            <auto-complete v-on:symbolentered="symbolEntered" />
         </div>
 
         <div class="button-add-to-portfolio" v-if="symbol && symbol != ''">
-            <router-link
-                :to="{ name: 'portfolio', params: { symbolToAdd: symbol } }"
-            >
-                <button>Add To Portfolio</button>
+            <router-link :to="{ name: 'portfolio', params: { symbolToAdd: symbol } }">
+                <button data-test="button-add-to-profile">Add To Portfolio</button>
             </router-link>
 
-            <show-research
-                :symbolId="symbol"
-                v-bind:key="symbol"
-            ></show-research>
+            <show-research :symbolId="symbol" v-bind:key="symbol"></show-research>
         </div>
     </div>
 </template>

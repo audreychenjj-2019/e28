@@ -23,7 +23,6 @@
                 symbol: ""
             };
         },
-        methods: {},
         mounted() {
             this.symbol = this.symbolId;
         }
