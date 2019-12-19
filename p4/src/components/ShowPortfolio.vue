@@ -8,7 +8,7 @@
         </div>
 
         <show-grid
-            v-if="portfolioRows && portfolioRows.length > 0"
+            v-if="portfolioRows"
             :symbolToAdd="symbolToAdd"
             :holdings="holdings"
             :portfolioRows="portfolioRows"
