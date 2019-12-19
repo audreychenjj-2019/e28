@@ -8,14 +8,7 @@
                 <label for="name">Name (Min: 2 characters)</label>
 
                 <div>
-                    <input
-                        data-test="input-name-signup"
-                        type="name"
-                        value
-                        required
-                        autofocus
-                        v-model="$v.form.name.$model"
-                    />
+                    <input data-test="input-name-signup" type="name" value required autofocus v-model="$v.form.name.$model" />
                     <div v-if="$v.form.name.$error">
                         <div class="form-feedback-error" v-if="!$v.form.name.required">A name is required</div>
                         <div class="form-feedback-error" v-else-if="!$v.form.name.minLength">
@@ -29,14 +22,7 @@
                 <label for="email">Email (will be username)</label>
 
                 <div>
-                    <input
-                        data-test="input-email-signup"
-                        type="email"
-                        value
-                        required
-                        autofocus
-                        v-model="$v.form.email.$model"
-                    />
+                    <input data-test="input-email-signup" type="email" value required autofocus v-model="$v.form.email.$model" />
                 </div>
 
                 <div v-if="$v.form.email.$error">
@@ -49,12 +35,7 @@
                 <label for="password">Password (Min: 6 characters)</label>
 
                 <div>
-                    <input
-                        data-test="input-password-signup"
-                        type="password"
-                        required
-                        v-model="$v.form.password.$model"
-                    />
+                    <input data-test="input-password-signup" type="password" required v-model="$v.form.password.$model" />
                 </div>
 
                 <div v-if="$v.form.password.$error">
@@ -68,12 +49,7 @@
                 <label for="confirmPassword">Confirm Password</label>
 
                 <div>
-                    <input
-                        data-test="input-password-confirm-signup"
-                        type="password"
-                        required
-                        v-model="$v.form.confirmPassword.$model"
-                    />
+                    <input data-test="input-password-confirm-signup" type="password" required v-model="$v.form.confirmPassword.$model" />
                 </div>
                 <div v-if="$v.form.confirmPassword.$error">
                     <div class="form-feedback-error" v-if="!$v.form.confirmPassword.required">Password is required</div>
@@ -129,7 +105,9 @@
                             .updateProfile({
                                 displayName: this.form.name
                             })
-                            .then(() => {});
+                            .then(() => {
+                                this.$store.commit("setMergeAccountAndLocalStorage", true);
+                            });
                     })
                     .catch(err => {
                         this.error = err.message;

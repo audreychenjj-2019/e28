@@ -157,10 +157,12 @@
     }
 
     .vue-suggestion-input {
+        position: relative;
         display: block;
-        padding: 0.5rem 0.8rem;
-        font-size: 0.9rem;
-        line-height: 1.25;
+        margin: 0 auto;
+        width: 80%;
+        line-height: 2;
+        text-align: center;
         background-color: #fff;
         border: 1px solid dodgerblue;
         border-radius: 0.25rem;

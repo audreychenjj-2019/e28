@@ -36,6 +36,10 @@ export default class Portfolio {
         localStorage.setItem("portfolio", JSON.stringify(this.items));
     }
 
+    updateNewValues(newValues) {
+        localStorage.setItem("portfolio", JSON.stringify(newValues));
+    }
+
     /**
      * Add a new item of the given symbol
      */

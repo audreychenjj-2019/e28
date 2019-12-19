@@ -16,42 +16,42 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import IndexSector from "@/components/IndexSector.vue";
-import TopQuotes from "@/components/TopQuotes.vue";
-import NewsHeadlines from "@/components/NewsHeadlines.vue";
+    // @ is an alias to /src
+    import IndexSector from "@/components/IndexSector.vue";
+    import TopQuotes from "@/components/TopQuotes.vue";
+    import NewsHeadlines from "@/components/NewsHeadlines.vue";
 
-export default {
-    name: "today",
-    components: {
-        "index-sector": IndexSector,
-        "top-quotes": TopQuotes,
-        "news-headlines": NewsHeadlines
-    }
-};
+    export default {
+        name: "today",
+        components: {
+            "index-sector": IndexSector,
+            "top-quotes": TopQuotes,
+            "news-headlines": NewsHeadlines
+        }
+    };
 </script>
 
 <style scoped>
-.today {
-    width: 100%;
-}
+    .today {
+        width: 100%;
+    }
 
-.floating-layout {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: left;
-    float: left;
-}
+    .floating-layout {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: left;
+        float: left;
+    }
 
-.one-floater {
-    position: relative;
-    float: left;
-    vertical-align: top;
-    padding: 20px;
-}
+    .one-floater {
+        position: relative;
+        float: left;
+        vertical-align: top;
+        padding: 20px;
+    }
 
-.news-box {
-    max-width: 60%;
-}
+    .news-box {
+        max-width: 60%;
+    }
 </style>

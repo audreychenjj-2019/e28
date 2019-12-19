@@ -52,7 +52,9 @@
                 firebase
                     .auth()
                     .signInWithEmailAndPassword(this.form.email, this.form.password)
-                    .then()
+                    .then(() => {
+                        this.$store.commit("setMergeAccountAndLocalStorage", true);
+                    })
                     .catch(err => {
                         this.error = err.message;
                     });

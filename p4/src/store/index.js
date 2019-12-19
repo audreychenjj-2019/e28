@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import * as app from "@/app.js";
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
             uid: null,
             db: null,
             loggedIn: false,
+            mergeAccountAndLocalStorage: false,
             profile: null,
             holdings: []
         }
@@ -55,6 +57,9 @@ export default new Vuex.Store({
         setLoggedInStatus(state, payload) {
             state.user.loggedIn = payload;
         },
+        setMergeAccountAndLocalStorage(state, payload) {
+            state.user.mergeAccountAndLocalStorage = payload;
+        },
         setProfile(state, payload) {
             state.user.profile = payload;
         },
@@ -88,34 +93,40 @@ export default new Vuex.Store({
                 .ref("/portfolios/" + user.uid)
                 .once("value")
                 .then(snapshot => {
-                    let portfolio = localStorage.getItem("portfolio");
-                    const holdingsInLocalStorage = portfolio ? JSON.parse(portfolio) : [];
+                    const portfolio = new app.Portfolio();
+                    let holdingsInLocalStorage = portfolio.getHoldings();
 
-                    const holdingsInDB = snapshot.child("holdings").val();
+                    // Only merge holdings in LocalStorage with holdings in the online account at first login, flag set in Signin.vue
+                    if (state.user.mergeAccountAndLocalStorage) {
+                        commit("setMergeAccountAndLocalStorage", false);
 
-                    var union = holdingsInLocalStorage.concat(holdingsInDB);
+                        const holdingsInAccount = snapshot.child("holdings").val();
 
-                    if (union && union[0] == null) {
-                        union = [];
-                    }
+                        var union = holdingsInLocalStorage.concat(holdingsInAccount);
 
-                    if (union.length >= 2) {
-                        for (var i = 0; i < union.length; i++) {
-                            for (var j = i + 1; j < union.length; j++) {
-                                if (union[i].symbol == union[j].symbol) {
-                                    union[i].cost =
-                                        (union[i].shares * union[i].cost + union[j].shares * union[j].cost) /
-                                        (union[i].shares + union[j].shares);
-                                    union[i].shares += union[j].shares;
-                                    union.splice(j, 1);
-                                    j--;
+                        if (union && union[0] == null) {
+                            union = [];
+                        }
+
+                        if (union.length >= 2) {
+                            for (var i = 0; i < union.length; i++) {
+                                for (var j = i + 1; j < union.length; j++) {
+                                    if (union[i].symbol == union[j].symbol) {
+                                        union[i].cost =
+                                            (union[i].shares * union[i].cost + union[j].shares * union[j].cost) / (union[i].shares + union[j].shares);
+                                        union[i].shares += union[j].shares;
+                                        union.splice(j, 1);
+                                        j--;
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    localStorage.setItem("portfolio", JSON.stringify(union));
-                    commit("setHoldings", union);
+                        portfolio.updateNewValues(union);
+                        commit("setHoldings", union);
+                    } else {
+                        commit("setHoldings", holdingsInLocalStorage);
+                    }
                 });
         }
     },
