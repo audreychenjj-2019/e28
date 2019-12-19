@@ -75,7 +75,6 @@
         position: relative;
         margin: auto;
         width: 80%;
-        /* border: 3px solid #0074d9; */
         background-color: whitesmoke;
         padding: 10px;
     }

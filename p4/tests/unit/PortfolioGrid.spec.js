@@ -1,51 +1,32 @@
-import Vue from 'vue';
-import { expect } from 'chai'
-// import { mount } from '@vue/test-utils'
-import PortfolioGrid from '@/components/PortfolioGrid.vue'
-import GlobalFunctions from "@/mixins/GlobalFunctions.js";
+import { expect } from "chai";
+import { mount, RouterLinkStub } from "@vue/test-utils";
+import PortfolioRow from "@/components/PortfolioRow.vue";
 
-describe('PortfolioGrid.vue', () =>
-{
-    const holdings = [{ "cost": 100, "shares": 100, "symbol": "MSFT" }]
-    // const companiesPriceList = [{ "symbol": "MSFT", "price": 153.07 }]
-    // let portfolioRow = { "symbol": "MSFT", "shares": 100, "cost": "100.00", "totalCost": "10000.00", "marketPrice": 153.07, "marketValue": 15307, "profit": 5307 }
+describe("PortfolioRow.vue", () => {
+    let holdingsRow = { cost: 100, shares: 100, symbol: "MSFT" };
+    const portfolioRow = {
+        symbol: "MSFT",
+        shares: 100,
+        cost: "100.00",
+        totalCost: "10000.00",
+        marketPrice: 153.07,
+        marketValue: 15307,
+        profit: 5307
+    };
 
-    it('Shows holdings costs in Portfolio', () =>
-    {
-        const Constructor = Vue.extend(PortfolioGrid);
-
-        const comp = new Constructor({
-            propsData: { holdings },
-            mixins: [GlobalFunctions]
-        }).$mount();
-
-        // const wrapper = shallowMount(PortfolioGrid, {
-        //     propsData: { holdings },
-        //     mixins: [GlobalFunctions],
-        //     // Mock axios with computed property
-        //     data: function ()
-        //     {
-        //         return {
-        //             companiesPriceList: function ()
-        //             {
-        //                 return companiesPriceList
-        //             },
-        //             // portfolioRows: function ()
-        //             // {
-        //             //     return [portfolioRow]
-        //             // },
-        //         }
-        //     }
-        // })
-
-        Vue.nextTick(() =>
-        {
-            expect(comp.$el.totalValue)
-                .to.equal(10000.00);
-            // Since we're doing this asynchronously, we need to call done() to tell Mocha that we've finished the test.
+    it("Displays a portfolio row for a holding along with market data and an edit button", () => {
+        const wrapper = mount(PortfolioRow, {
+            propsData: { holdingsRow, portfolioRow },
+            computed: {
+                portfolioEditStatus: function() {
+                    return "MSFT";
+                }
+            },
+            stubs: {
+                RouterLink: RouterLinkStub
+            }
         });
-
-        // expect(comp.$PortfolioGrid.totalValue).to.equal(10000.00)
-
-    })
-})
+        expect(wrapper.text()).to.include("15307");
+        expect(wrapper.find('[data-test="button-edit"]').exists()).to.equal(true);
+    });
+});

@@ -1,16 +1,19 @@
 <template>
-    <div id="StockSuggestion">
-        <suggest-select
-            :items="items"
-            v-model="item"
-            :setLabel="setLabel"
-            :minLen="1"
-            :placeholder="placeholder"
-            :itemTemplate="itemTemplate"
-            @onInputChange="inputChange"
-            @onItemSelected="itemSelected"
-        ></suggest-select>
-        <button v-if="showButton" v-on:click="onEnter">Research</button>
+    <div id="StockSuggestion" class="component-autocomplete">
+        <div class="table-cell">
+            <suggest-select
+                :items="items"
+                v-model="item"
+                :setLabel="setLabel"
+                :inputClasses="'input-box'"
+                :minLen="1"
+                :placeholder="placeholder"
+                :itemTemplate="itemTemplate"
+                @onInputChange="inputChange"
+                @onItemSelected="itemSelected"
+            ></suggest-select>
+            <button v-if="showButton" v-on:click="onEnter">Research</button>
+        </div>
     </div>
 </template>
 
@@ -43,6 +46,7 @@
         methods: {
             itemSelected(item) {
                 this.item = item;
+                this.onEnter();
             },
             setLabel(item) {
                 return item.name;
@@ -64,7 +68,7 @@
                             (a.symbol + a.name).toLowerCase().indexOf(text.toLowerCase()) -
                             (b.symbol + b.name).toLowerCase().indexOf(text.toLowerCase())
                     )
-                    .slice(0, 10);
+                    .slice(0, 8);
                 if (this.items.length == 1) {
                     this.itemSelected(this.items[0]);
                     this.onEnter();
@@ -79,4 +83,12 @@
     };
 </script>
 
-<style scoped></style>
+<style scoped>
+    .component-autocomplete {
+        width: 204px;
+    }
+
+    .table-cell {
+        display: inline-block;
+    }
+</style>

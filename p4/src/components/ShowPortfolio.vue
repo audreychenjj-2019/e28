@@ -1,11 +1,14 @@
 <template>
     <div id="ShowPortfolio" class="show-portfolio">
         <div class="portfolio-heading" align="left">
-            Portfolio Holdings - Current Market Value $
-            <label v-bind:key="totalValue">{{ format(totalValue, 2) }}</label>
+            <h2>
+                <label>Portfolio Holdings - Current Market Value $</label>
+                <label v-bind:key="totalValue">{{ format(totalValue, 2) }}</label>
+            </h2>
         </div>
 
         <show-grid
+            v-if="portfolioRows && portfolioRows.length > 0"
             :symbolToAdd="symbolToAdd"
             :holdings="holdings"
             :portfolioRows="portfolioRows"
@@ -13,6 +16,7 @@
             @addToPortfolio="addToPortfolio"
             @removeFromPortfolio="removeFromPortfolio"
         />
+        <div v-else>Loading ...</div>
     </div>
 </template>
 
@@ -32,9 +36,7 @@
                 return Array.from(new Set(this.holdings.map(holding => holding.symbol)));
             },
             totalValue: function() {
-                return this.portfolioRows
-                    ? this.portfolioRows.reduce((accumulator, row) => accumulator + row.marketValue, 0)
-                    : 0;
+                return this.portfolioRows ? this.portfolioRows.reduce((accumulator, row) => accumulator + row.marketValue, 0) : 0;
             }
         },
         watch: {
@@ -65,16 +67,10 @@
                                   cost: Number(holding.cost).toFixed(2),
                                   totalCost: Number(holding.shares * holding.cost).toFixed(2),
                                   marketPrice: this.companiesPriceList.find(c => c.symbol == holding.symbol).price,
-                                  marketValue: Number(
-                                      (
-                                          holding.shares *
-                                          this.companiesPriceList.find(c => c.symbol == holding.symbol).price
-                                      ).toFixed(2)
-                                  ),
+                                  marketValue: Number((holding.shares * this.companiesPriceList.find(c => c.symbol == holding.symbol).price).toFixed(2)),
                                   profit: Number(
                                       (
-                                          holding.shares *
-                                              this.companiesPriceList.find(c => c.symbol == holding.symbol).price -
+                                          holding.shares * this.companiesPriceList.find(c => c.symbol == holding.symbol).price -
                                           holding.shares * holding.cost
                                       ).toFixed(2)
                                   )

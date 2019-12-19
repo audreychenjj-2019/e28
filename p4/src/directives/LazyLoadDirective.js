@@ -7,7 +7,7 @@ export default {
                     setTimeout(() => el.classList.add("loaded"), 100);
                 });
                 imageElement.addEventListener("error", () =>
-                    console.log(
+                    window.console.log(
                         "Image does not exist at URL (" +
                             imageElement.dataset.url +
                             ") provided by source NewsAPI, but the page still loaded gracefully."

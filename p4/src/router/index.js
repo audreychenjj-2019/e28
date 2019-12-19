@@ -1,9 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import TodayPage from "@/views/TodayPage.vue";
-// import PortfolioPage from "@/views/PortfolioPage.vue";
-// import ResearchPage from "@/views/ResearchPage.vue";
-// import AccountPage from "@/views/AccountPage.vue";
 
 Vue.use(VueRouter);
 

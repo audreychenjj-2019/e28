@@ -85,7 +85,7 @@ export default new Vuex.Store({
 
         fetchHoldings({ commit, state }, user) {
             state.user.db
-                .ref("portfolios/" + user.uid)
+                .ref("/portfolios/" + user.uid)
                 .once("value")
                 .then(snapshot => {
                     let portfolio = localStorage.getItem("portfolio");

@@ -10,6 +10,7 @@
 * Fixed variable names in global helper functions from si (which meant SI system of units) to units and rx to regularExpression
 * Removed calculation & class logic from the template and moved these into the script for all quotes displayed on the Today page.
 * Made the Today page mobile friendly with flex display of all components that are now able to float into the available space on any screen size.
+* Hitting enter key after typing new holding info adds it to the portfolio
 
 
 ## Outside resources
@@ -29,7 +30,8 @@ New features:
 * Management of data across Vuex, Local Storage and Firebase real-time database, accounting for all changes of holdings in the portfolio across signups, signins, signouts, page refreshes, and new sessions. Enabled users to start building their portfolio without having to create an account, but if they do create an account, the application clears the user's holding data from Local Storage after the user has signed out, so as protect their data and privacy.
 * Card format for displaying News Headlines that flow from left to right and fill the available space, so as to be slightly more mobile and multi-form-factor friendly. Plus now with image thumbnails that are lazy loaded, and progressively degrade to show no image if none is available while maintaining user experience.
 * E2E testing in MarketDash.js has a set of workflows that would be most commonly followed by the users.
-* Unit tests folder contains the most important unit tests to verify proper functioning of the use-cases, but isn't an exhaustive list because I now have a large number of components.
+* Unit tests folder contains unit tests to verify proper functioning of the use-cases, but isn't an exhaustive list because this p4 now has a large number of components.
+* Netlify used for production. 
 
 Improvements
 * Moved helper or globally used functions into a global mixin, e.g. formatting of large numbers representing money, calculation of time intervals). Learned about mixins while using chart.js.

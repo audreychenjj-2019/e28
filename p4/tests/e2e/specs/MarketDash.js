@@ -89,7 +89,7 @@ describe("MarketDash", () => {
             .should("have.value", "100");
         cy.get('[data-test="button-edit"]').click();
         cy.contains("div", "MSFT");
-        cy.contains("label", "1000.00");
+        cy.contains("label", "10000.00");
         cy.get('[data-test="button-add"]').click();
         cy.get('[data-test="input-autocomplete"]')
             .type("amaz")
@@ -158,7 +158,7 @@ describe("MarketDash", () => {
             .type("cytests")
             .should("have.value", "cytests");
         cy.get('[data-test="button-signup"]').click();
-        cy.contains("div", "you are logged in!");
+        cy.contains("div", "You are logged in!");
         cy.contains("body", "K");
         cy.contains("body", "M");
         cy.get('[data-test="button-signout"]').click();
@@ -170,7 +170,7 @@ describe("MarketDash", () => {
             .type("cytests")
             .should("have.value", "cytests");
         cy.get('[data-test="button-signin"]').click();
-        cy.contains("div", "you are logged in!");
+        cy.contains("div", "You are logged in!");
         cy.contains("body", "K");
         cy.contains("body", "M");
         cy.get('[data-test="button-delete-account"]').click();
@@ -182,9 +182,6 @@ describe("MarketDash", () => {
             .type("cytests")
             .should("have.value", "cytests");
         cy.get('[data-test="button-signin"]').click();
-        cy.contains(
-            "body",
-            "There is no user record corresponding to this identifier. The user may have been deleted."
-        );
+        cy.contains("body", "There is no user record corresponding to this identifier. The user may have been deleted.");
     });
 });

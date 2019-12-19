@@ -20,7 +20,7 @@ const configOptions = {
     projectId: "p4-stocks",
     storageBucket: "p4-stocks.appspot.com",
     messagingSenderId: "909312102362",
-    appId: "1:909312102362:web:434238b8fd91c86ee4bae3"
+    appId: "1:909312102362:web:745b47314661f7cde4bae3"
 };
 
 firebase.initializeApp(configOptions);
@@ -30,6 +30,7 @@ firebase.auth().onAuthStateChanged(user => {
         store.dispatch("fetchUser", user);
         const db = firebase.database();
         store.commit("setDatabaseReference", db);
+        store.dispatch("fetchHoldings", user);
     }
 });
 

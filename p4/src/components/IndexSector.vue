@@ -1,18 +1,10 @@
 <template>
     <div id="IndexSector" class="index-sector">
-        <quotes-box
-            v-if="majorIndexesList"
-            :topList="majorIndexesList"
-            :title="'Top US Indexes'"
-            :topX="3"
-            :isIndex="true"
-        />
+        <quotes-box v-if="majorIndexesList" :topList="majorIndexesList" :title="'Top US Indexes'" :topX="3" :isIndex="true" />
+        <div v-else>Loading Major US Indices ...</div>
 
-        <sector-quotes-box
-            v-if="sectorPerformanceList"
-            :sectorList="sectorPerformanceList"
-            :title="'Sector-Wise Performance'"
-        />
+        <sector-quotes-box v-if="sectorPerformanceList" :sectorList="sectorPerformanceList" :title="'Sector-Wise Performance'" />
+        <div v-else>Loading Sectorwise Performances ...</div>
     </div>
 </template>
 

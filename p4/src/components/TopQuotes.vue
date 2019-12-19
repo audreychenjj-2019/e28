@@ -1,10 +1,13 @@
 <template>
     <div id="TopQuotes" class="top-quotes">
         <quotes-box v-if="topGainerList" :topList="topGainerList" :title="'Top Gainers'" :topX="5"></quotes-box>
+        <div v-else>Loading Top Gainers ...</div>
 
         <quotes-box v-if="topLoserList" :topList="topLoserList" :title="'Top Losers'" :topX="5"></quotes-box>
+        <div v-else>Loading Top Losers ...</div>
 
         <quotes-box v-if="topActiveList" :topList="topActiveList" :title="'Most Active Trades'" :topX="5"></quotes-box>
+        <div v-else>Loading Top Actives ...</div>
     </div>
 </template>
 
@@ -35,24 +38,15 @@
         },
         mounted() {
             app.axios.get(app.config.mostGainerStockUrl).then(response => {
-                this.topGainerList = this.sortByProperty(
-                    response.data[Object.keys(response.data)[0]],
-                    "changesPercentage"
-                );
+                this.topGainerList = this.sortByProperty(response.data[Object.keys(response.data)[0]], "changesPercentage");
             });
 
             app.axios.get(app.config.mostLoserStockUrl).then(response => {
-                this.topLoserList = this.sortByProperty(
-                    response.data[Object.keys(response.data)[0]],
-                    "changesPercentage"
-                );
+                this.topLoserList = this.sortByProperty(response.data[Object.keys(response.data)[0]], "changesPercentage");
             });
 
             app.axios.get(app.config.mostActiveStockUrl).then(response => {
-                this.topActiveList = this.sortByProperty(
-                    response.data[Object.keys(response.data)[0]],
-                    "changesPercentage"
-                );
+                this.topActiveList = this.sortByProperty(response.data[Object.keys(response.data)[0]], "changesPercentage");
             });
         }
     };

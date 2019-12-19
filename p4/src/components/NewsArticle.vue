@@ -64,7 +64,6 @@
 
     .content {
         align-self: center;
-        /* font-size: larger; */
     }
 
     .image-thumbnail {

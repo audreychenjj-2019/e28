@@ -3,11 +3,7 @@
         <div class="title">
             <p>News Headlines</p>
         </div>
-        <div
-            class="layout"
-            v-for="(article, index) in articles"
-            v-bind:key="index"
-        >
+        <div class="layout" v-for="(article, index) in articles" v-bind:key="index">
             <news-article :article="article"></news-article>
         </div>
     </div>

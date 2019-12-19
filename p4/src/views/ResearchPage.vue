@@ -1,6 +1,6 @@
 <template>
     <div id="research-page" class="research-page">
-        <div>
+        <div class="autocomplete-show">
             <auto-complete v-on:symbolentered="symbolEntered" />
         </div>
 
@@ -59,5 +59,9 @@
 <style scoped>
     .research-page {
         padding: 5px;
+    }
+
+    .autocomplete-show {
+        display: inline-block;
     }
 </style>

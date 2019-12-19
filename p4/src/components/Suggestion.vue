@@ -113,6 +113,7 @@
                 }, 200);
             },
             selectItem(item) {
+                // mouse selection of items comes here
                 if (item) {
                     this.searchText = this.setLabel(item);
                     this.$emit("onItemSelected", item);
@@ -146,6 +147,7 @@
     .vue-suggestion {
         position: relative;
     }
+
     .vue-suggestion .vue-suggestion-list {
         position: absolute;
     }
@@ -153,51 +155,32 @@
     .vue-suggestion .vue-suggestion-list .vue-suggestion-list-item {
         cursor: pointer;
     }
-    .vue-suggestion .vue-suggestion-list .vue-suggestion-list-item.vue-suggestion-item-active {
-        background-color: whitesmoke;
-    }
 
-    .vue-suggestion .vue-suggestion-input-group .vue-suggestion-input {
+    .vue-suggestion-input {
         display: block;
-
-        margin: 0 auto;
-        padding: 0.5rem 0.7rem;
+        padding: 0.5rem 0.8rem;
         font-size: 0.9rem;
         line-height: 1.25;
-        color: darkblue;
-        outline: none;
         background-color: #fff;
-        background-image: none;
-        background-clip: padding-box;
         border: 1px solid dodgerblue;
         border-radius: 0.25rem;
-        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    }
-    .vue-suggestion .vue-suggestion-input-group .vue-suggestion-input:focus {
-        border: 1px solid #023d7b;
     }
 
-    .vue-suggestion .vue-suggestion-list {
-        width: 180px;
+    .vue-suggestion-list {
+        border: 1px solid dodgerblue;
+    }
+
+    .vue-suggestion-list-item {
         text-align: left;
-        border: none;
-        border-top: none;
-        max-height: 400px;
-        overflow-y: auto;
-        overflow: hidden;
-        border-bottom: 1px solid #023d7b;
+        border: 1px solid dodgerblue;
+        padding: 5px;
     }
-    .vue-suggestion .vue-suggestion-list .vue-suggestion-list-item {
-        cursor: pointer;
-        background-color: red;
-        padding: 10px;
-        border-left: 10px solid #023d7b;
-        border-right: 1px solid #023d7b;
+
+    .vue-suggestion-list-item:hover {
+        background-color: aquamarine;
     }
-    .vue-suggestion .vue-suggestion-list .vue-suggestion-list-item:last-child {
-        border-bottom: none;
-    }
-    .vue-suggestion .vue-suggestion-list .vue-suggestion-list-item:hover {
-        background-color: #eee;
+
+    .vue-suggestion-item-active {
+        background-color: aquamarine;
     }
 </style>
