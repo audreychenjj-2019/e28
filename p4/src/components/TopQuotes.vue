@@ -55,5 +55,6 @@
 <style scoped>
     .top-quotes {
         font-size: larger;
+        width: 100%;
     }
 </style>

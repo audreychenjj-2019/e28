@@ -27,7 +27,6 @@
 </template>
 
 <script>
-    import * as app from "@/app.js";
     import LineChart from "@/components/LineChart.vue";
 
     export default {
@@ -35,10 +34,10 @@
         components: {
             "line-chart": LineChart
         },
-        props: ["symbolId"],
+        props: ["companyKeyMetrics"],
         data: function() {
             return {
-                companyKeyMetrics: null,
+                // companyKeyMetrics: null,
                 metricName: "",
                 year: [],
                 metric: [],
@@ -51,14 +50,6 @@
                     }
                 }
             };
-        },
-        computed: {
-            lastResearchedSymbol: function() {
-                return this.$store.state.lastResearchedSymbol;
-            },
-            lastResearchedSymbolMetrics: function() {
-                return this.$store.state.lastResearchedSymbolMetrics;
-            }
         },
         methods: {
             trend: function(metricName) {
@@ -84,19 +75,6 @@
                         datasets: datasets
                     }
                 );
-            }
-        },
-        mounted() {
-            if (this.symbolId == this.lastResearchedSymbol && this.lastResearchedSymbolMetrics) {
-                this.companyKeyMetrics = this.lastResearchedSymbolMetrics;
-            } else {
-                app.axios.get(app.config.companyKeyMetricsBaseUrl + this.symbolId).then(response => {
-                    this.companyKeyMetrics = response.data.metrics;
-                    this.$store.commit("setLastResearchedSymbolMetrics", this.companyKeyMetrics);
-                }),
-                    error => {
-                        window.console.error(error);
-                    };
             }
         }
     };

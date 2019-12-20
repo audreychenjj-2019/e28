@@ -4,7 +4,7 @@
             <div class="one-floater">
                 <index-sector />
             </div>
-            <div class="one-floater">
+            <div class="one-floater top-quotes-unsquished">
                 <top-quotes />
             </div>
             <div class="one-floater news-box">
@@ -49,6 +49,10 @@
         float: left;
         vertical-align: top;
         padding: 20px;
+    }
+
+    .top-quotes-unsquished {
+        min-width: 15%;
     }
 
     .news-box {

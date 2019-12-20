@@ -29,44 +29,9 @@
 </template>
 
 <script>
-    import * as app from "@/app.js";
-
     export default {
         name: "showprofile",
-        props: ["symbolId"],
-        data: function() {
-            return {
-                companyProfile: null,
-                indexComponent: null
-            };
-        },
-        computed: {
-            lastResearchedSymbol: function() {
-                return this.$store.state.lastResearchedSymbol;
-            },
-            lastResearchedSymbolProfile: function() {
-                return this.$store.state.lastResearchedSymbolProfile;
-            }
-        },
-        mounted() {
-            if (this.symbolId == this.lastResearchedSymbol && this.lastResearchedSymbolProfile) {
-                this.companyProfile = this.lastResearchedSymbolProfile;
-            } else {
-                app.axios.get(app.config.baseProfileUrl + this.symbolId).then(response => {
-                    this.companyProfile = response.data.profile;
-                    this.$store.commit("setLastResearchedSymbol", this.symbolId);
-                    this.$store.commit("setLastResearchedSymbolProfile", this.companyProfile);
-                }),
-                    error => {
-                        window.console.error(error);
-                    };
-            }
-            app.axios.get(app.config.baseIndexComponentUrl + this.symbol).then(response => {
-                if (response.data.length > 0) {
-                    this.indexComponent = response.data[0].index;
-                }
-            });
-        }
+        props: ["symbolId", "companyProfile", "indexComponent"]
     };
 </script>
 
