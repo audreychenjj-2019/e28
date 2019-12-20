@@ -116,12 +116,13 @@
                 this.newHolding.symbol = symbol;
             },
             addPressed: function(symbol) {
-                this.newHolding = { symbol: symbol, shares: 0, cost: 0 };
+                this.newHolding = { symbol: symbol, shares: 1, cost: 0 };
                 this.modeAddConfirm = "Confirm";
             },
             cancelPressed: function() {
                 this.modeAddConfirm = "Add";
                 if (this.symbolToAdd != "") {
+                    this.$store.commit("setPortfolioEditStatus", null);
                     this.$router.go(-1);
                 }
             },

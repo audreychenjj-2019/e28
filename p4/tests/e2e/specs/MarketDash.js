@@ -39,13 +39,13 @@ describe("MarketDash", () => {
         cy.get('[data-test="input-autocomplete"]').should("have.attr", "placeholder", "Company Name/Symbol");
         cy.get('[data-test="button-add-to-profile"]').click();
         cy.get('[data-test="input-shares"]')
+            .type("0")
+            .should("have.value", "10");
+        cy.get('[data-test="input-cost"]')
             .type("30")
             .should("have.value", "030");
-        cy.get('[data-test="input-cost"]')
-            .type("100")
-            .should("have.value", "0100");
         cy.get('[data-test="button-confirm-add"]').click();
-        cy.contains("label", "3000.00");
+        cy.contains("label", "300.00");
         cy.contains("div", "MSFT");
     });
 
@@ -56,13 +56,13 @@ describe("MarketDash", () => {
         cy.get('[data-test="input-autocomplete"]').should("have.attr", "placeholder", "Company Name/Symbol");
         cy.get('[data-test="button-add-to-profile"]').click();
         cy.get('[data-test="input-shares"]')
-            .type("30")
-            .should("have.value", "030");
+            .type("0")
+            .should("have.value", "10");
         cy.get('[data-test="input-cost"]')
             .type("100")
             .should("have.value", "0100");
         cy.get('[data-test="button-confirm-add"]').click();
-        cy.contains("label", "3000.00");
+        cy.contains("label", "1000.00");
         cy.contains("div", "MSFT");
     });
 
@@ -76,8 +76,8 @@ describe("MarketDash", () => {
             .type("MSFT")
             .should("have.value", "Microsoft Corporation");
         cy.get('[data-test="input-shares"]')
-            .type("10")
-            .should("have.value", "010");
+            .type("0")
+            .should("have.value", "10");
         cy.get('[data-test="input-cost"]')
             .type("100")
             .should("have.value", "0100");
@@ -95,8 +95,8 @@ describe("MarketDash", () => {
             .type("amaz")
             .should("have.value", "Amazon.com Inc.");
         cy.get('[data-test="input-shares"]')
-            .type("20")
-            .should("have.value", "020");
+            .type("5")
+            .should("have.value", "15");
         cy.get('[data-test="input-cost"]')
             .type("200")
             .should("have.value", "0200");
@@ -104,7 +104,7 @@ describe("MarketDash", () => {
         cy.get('[data-test="button-delete"]')
             .first()
             .click();
-        cy.contains("label", "4000.00");
+        cy.contains("label", "3000.00");
         cy.contains("div", "AMZN");
         cy.contains("div", "MSFT").should(not);
         cy.get('[data-test="router-portfolio-to-research"]')
@@ -123,27 +123,27 @@ describe("MarketDash", () => {
             .type("kello")
             .should("have.value", "Kellogg Company");
         cy.get('[data-test="input-shares"]')
-            .type("50")
-            .should("have.value", "050");
+            .type("0")
+            .should("have.value", "10");
         cy.get('[data-test="input-cost"]')
             .type("100")
             .should("have.value", "0100");
         cy.get('[data-test="button-confirm-add"]').click();
         cy.contains("div", "K");
-        cy.contains("label", "5000.00");
+        cy.contains("label", "1000.00");
         cy.get('[data-test="button-add"]').click();
         cy.get('[data-test="input-autocomplete"]')
             .type("macy'")
             .should("have.value", "Macy's Inc");
         cy.get('[data-test="input-shares"]')
-            .type("20")
-            .should("have.value", "020");
+            .type("00")
+            .should("have.value", "100");
         cy.get('[data-test="input-cost"]')
-            .type("100")
-            .should("have.value", "0100");
+            .type("200")
+            .should("have.value", "0200");
         cy.get('[data-test="button-confirm-add"]').click();
         cy.contains("div", "M");
-        cy.contains("label", "2000.00");
+        cy.contains("label", "20000.00");
         cy.get('[data-test="button-save-to-account"]').click();
         cy.get('[data-test="input-name-signup"]')
             .type("CyTester")
